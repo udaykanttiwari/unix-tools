@@ -17,13 +17,17 @@ public class Cut {
         Cut cut = new Cut();
         ReadFile file = new ReadFile();
         String fileData= file.readFile(args[0]);
-        if(args[1].startsWith("-f")&&args[2].startsWith("-d")){
-            int field = Integer.parseInt(args[1].substring(2, args[1].length()));
-            String delimiter = args[2].substring(2, args[2].length());
-            cut.cutByField(fileData, field, delimiter);
+        if(args.length == 3){
+            if(args[1].startsWith("-f")&&args[2].startsWith("-d")){
+                int field = Integer.parseInt(args[1].substring(2, args[1].length()));
+                String delimiter = args[2].substring(2, args[2].length());
+                cut.cutByField(fileData, field, delimiter);
+            }
         }
-        int field = Integer.parseInt(args[1].substring(2, args[1].length()));
-        String delimiter = "";
-        cut.cutByField(fileData,field,delimiter);
+        if(args.length == 2){
+            int field = Integer.parseInt(args[1].substring(2, args[1].length()));
+            String delimiter = "";
+            cut.cutByField(fileData,field,delimiter);
+        }
     }
 }

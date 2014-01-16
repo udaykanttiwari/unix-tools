@@ -17,5 +17,4 @@ public class ReduceSpaceTest {
         String actual= rs.reduceSpace("uday     kant    tiwari\nharjas      singh");
         Assert.assertEquals(expected,actual);
     }
-
 }

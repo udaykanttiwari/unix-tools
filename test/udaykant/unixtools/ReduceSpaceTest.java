@@ -1,7 +1,6 @@
 package udaykant.unixtools;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 public class ReduceSpaceTest {
     @org.junit.Test

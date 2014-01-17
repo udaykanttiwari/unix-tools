@@ -1,4 +1,4 @@
-<project default="createZip">
+<project name = "unix-tools">
     <target name="delete">
         <delete dir="classes"/>
     </target>

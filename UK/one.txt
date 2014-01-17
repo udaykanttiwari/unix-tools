@@ -1,5 +1,0 @@
-ab bc    cd
-ab bc        cd
-ab bc cd
-da baa bd
-ba gfh dfh

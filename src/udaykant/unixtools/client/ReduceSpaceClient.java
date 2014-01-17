@@ -1,7 +1,7 @@
 package udaykant.unixtools.client;
 
 import udaykant.unixtools.ReadFile;
-import udaykant.unixtools.ReduceSpace;
+import udaykant.unixtools.ReduceSpaces;
 
 
 public class ReduceSpaceClient {
@@ -9,7 +9,7 @@ public class ReduceSpaceClient {
         ReadFile file = new ReadFile();
         String fileData;
         fileData = file.readFile(args[0]);
-        ReduceSpace trimSpace = new ReduceSpace();
+        ReduceSpaces trimSpace = new ReduceSpaces();
         System.out.println(trimSpace.reduceSpace(fileData));
     }
 }

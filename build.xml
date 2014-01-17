@@ -1,0 +1,17 @@
+<project default="createZip">
+    <target name="delete">
+        <delete dir="classes"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="classes"/>
+        <javac srcdir="src" destdir="classes" includeantruntime="false"/>
+    </target>
+
+    <target name="createJar" depends="compile">
+        <mkdir dir="unix-tools"/>
+        <mkdir dir="unix-tools/lib"/>
+        <jar destfile="unix-tools/lib/unix-tools.jar" basedir="classes"/>
+    </target>
+
+</project>

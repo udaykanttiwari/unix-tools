@@ -48,11 +48,9 @@
     <target name="dist" depends="copyReadme">
         <zip zipfile="unix-tools.zip" basedir="unix_tools_dist"/>
     </target>
-    <target name="clean">
+    <target name="clean" depends="dist">
         <delete dir="build"/>
         <delete dir="unix_tools_dist"/>
-        <delete file="unix-tools.zip"/>
     </target>
-
 </project>
 

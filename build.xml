@@ -15,7 +15,7 @@
         <javac srcdir="test" destdir="build/test" classpath="build/src" classpathref="classPath"
                includeantruntime="false"/>
     </target>
-    <target name="run_test" depends="src_compile">
+    <target name="run_test" depends="test_compile">
         <java classname="org.junit.runner.JUnitCore"
               classpath="dependencies/junit-4.10.jar;build/src;build/test">
             <arg value="udaykant.unixtools.CutTest"/>
@@ -27,7 +27,7 @@
             <arg value="udaykant.unixtools.ReduceSpacesTest"/>
         </java>
     </target>
-    <target name="createJar" depends="src_compile">
+    <target name="createJar" depends="run_test">
         <mkdir dir="unix_tools_dist/lib"/>
         <mkdir dir="unix_tools_dist/bin"/>
         <jar destfile="unix_tools_dist/lib/unix-tools.jar" basedir="build/src"/>

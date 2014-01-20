@@ -1,17 +1,58 @@
-<project name = "unix-tools">
-    <target name="delete">
-        <delete dir="classes"/>
+<project name="unix-tools" basedir=".">
+
+    <path id="classPath">
+        <fileset dir="dependencies" includes="*.jar"/>
+    </path>
+
+    <target name="createDir">
+        <mkdir dir="build/src"/>
+        <mkdir dir="build/test"/>
+    </target>
+    <target name="src_compile" depends="createDir">
+        <javac srcdir="src" destdir="build/src" includeantruntime="false"/>
+    </target>
+    <target name="test_compile" depends="src_compile">
+        <javac srcdir="test" destdir="build/test" classpath="build/src" classpathref="classPath"
+               includeantruntime="false"/>
+    </target>
+    <target name="run_test" depends="src_compile">
+        <java classname="org.junit.runner.JUnitCore"
+              classpath="dependencies/junit-4.10.jar;build/src;build/test">
+            <arg value="udaykant.unixtools.CutTest"/>
+            <arg value="udaykant.unixtools.WCTest"/>
+            <arg value="udaykant.unixtools.HeadTest"/>
+            <arg value="udaykant.unixtools.TailTest"/>
+            <arg value="udaykant.unixtools.SortTest"/>
+            <arg value="udaykant.unixtools.UniqTest"/>
+            <arg value="udaykant.unixtools.ReduceSpacesTest"/>
+        </java>
+    </target>
+    <target name="createJar" depends="src_compile">
+        <mkdir dir="unix_tools_dist/lib"/>
+        <mkdir dir="unix_tools_dist/bin"/>
+        <jar destfile="unix_tools_dist/lib/unix-tools.jar" basedir="build/src"/>
+    </target>
+    <target name="copy_scripts" depends="createJar">
+        <copy file="scripts/UkCut.sh" todir="unix_tools_dist/bin"/>
+        <copy file="scripts/UkHead.sh" todir="unix_tools_dist/bin"/>
+        <copy file="scripts/UkSort.sh" todir="unix_tools_dist/bin"/>
+        <copy file="scripts/UkUniq.sh" todir="unix_tools_dist/bin"/>
+        <copy file="scripts/UkReduce.sh" todir="unix_tools_dist/bin"/>
+        <copy file="scripts/UkTail.sh" todir="unix_tools_dist/bin"/>
+        <copy file="scripts/UkWc.sh" todir="unix_tools_dist/bin"/>
     </target>
 
-    <target name="compile">
-        <mkdir dir="classes"/>
-        <javac srcdir="src" destdir="classes" includeantruntime="false"/>
+    <target name="copyReadme" depends="copy_scripts">
+        <copy file="README.md" todir="unix_tools_dist"/>
     </target>
-
-    <target name="createJar" depends="compile">
-        <mkdir dir="unix-tools"/>
-        <mkdir dir="unix-tools/lib"/>
-        <jar destfile="unix-tools/lib/unix-tools.jar" basedir="classes"/>
+    <target name="dist" depends="copyReadme">
+        <zip zipfile="unix-tools.zip" basedir="unix_tools_dist"/>
+    </target>
+    <target name="clean">
+        <delete dir="build"/>
+        <delete dir="unix_tools_dist"/>
+        <delete file="unix-tools.zip"/>
     </target>
 
 </project>
+

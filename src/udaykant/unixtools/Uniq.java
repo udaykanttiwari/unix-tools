@@ -1,22 +1,18 @@
 package udaykant.unixtools;
 
 public class Uniq {
-    public void displayUniqLines(String text){
+    public String displayUniqLines(String text){
         String[] lines = text.split("\n");
+        StringBuilder UniqLines = new StringBuilder();
         int length = lines.length;
         for (int i = 0; i <length-1 ; i++) {
-            if( !( lines[i].equals(lines[i+1] ))  )
-                System.out.println(lines[i]);
+            if( !( lines[i].equals(lines[i+1] )))
+                UniqLines.append(lines[i]);
+                UniqLines.append("\n");
         }
-        System.out.println(lines[length-1]);
+        UniqLines.append(lines[length-1]);
+        return UniqLines.toString();
     }
-    public static void main(String[] args) throws Exception{
 
-        ReadFile file = new ReadFile();
-        String fileData= file.readFile(args[0]);
-        Uniq uniq = new Uniq();
-        uniq.displayUniqLines(fileData);
-
-    }
 }
 

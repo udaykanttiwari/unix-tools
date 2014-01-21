@@ -1,33 +1,16 @@
 package udaykant.unixtools;
 
 public class Cut {
-    public void cutByField(String data,int field,String delimiter){
-        String [] lines= data.split("\n");
-        for(String s :lines){
-            try{
-                System.out.println(s.split(delimiter)[field]);
-            }
-            catch (ArrayIndexOutOfBoundsException ex){
-                System.out.println(s.split(delimiter)[0]);
-            }
-
-        }
-    }
-    public static void main(String[] args) throws Exception {
-        Cut cut = new Cut();
-        ReadFile file = new ReadFile();
-        String fileData= file.readFile(args[0]);
-        if(args.length == 3){
-            if(args[1].startsWith("-f")&&args[2].startsWith("-d")){
-                int field = Integer.parseInt(args[1].substring(2, args[1].length()));
-                String delimiter = args[2].substring(2, args[2].length());
-                cut.cutByField(fileData, field, delimiter);
+    public String cutByField(String data, int field, String delimiter) {
+        StringBuilder result = new StringBuilder();
+        String[] lines = data.split("\n");
+        for (String s : lines) {
+            int length  = s.split(delimiter).length;
+            if (length >= field) {
+                result.append(s.split(delimiter)[field - 1]);
+                result.append("\n");
             }
         }
-        if(args.length == 2){
-            int field = Integer.parseInt(args[1].substring(2, args[1].length()));
-            String delimiter = "";
-            cut.cutByField(fileData,field,delimiter);
-        }
+        return result.toString();
     }
 }

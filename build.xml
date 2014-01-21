@@ -12,7 +12,7 @@
         <javac srcdir="src" destdir="build/src" includeantruntime="false"/>
     </target>
     <target name="test_compile" depends="src_compile">
-        <javac srcdir="test" destdir="build/test" classpath="build/src" classpathref="classPath"
+        <javac srcdir="src;test" destdir="build/test" classpath="build/src" classpathref="classPath"
                includeantruntime="false"/>
     </target>
     <target name="run_test" depends="test_compile">
@@ -30,7 +30,7 @@
     <target name="createJar" depends="run_test">
         <mkdir dir="unix_tools_dist/lib"/>
         <mkdir dir="unix_tools_dist/bin"/>
-        <jar destfile="unix_tools_dist/lib/unix-tools.jar" basedir="build/src"/>
+          <jar destfile="unix_tools_dist/lib/unix-tools.jar" basedir="build/src"/>
     </target>
     <target name="copy_scripts" depends="createJar">
         <copy file="scripts/UkCut.sh" todir="unix_tools_dist/bin"/>
